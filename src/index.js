@@ -24,21 +24,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
-
-
-
-// fetchApiService.getAllRepos().then((body) => {
-// 	console.log(body);
-// });
-// fetchApiService.getAllUsers().then((user) => {
-// 	user.forEach((p) => {
-// 		console.log(p.login);
-// 	});
-// 	console.log(user);
-// });
-// fetchApiService.getUser('ar-iv').then((body) => {
-// 	console.log(body);
-// });
-// fetchApiService.getRepo('api_react').then((repo) => {
-// 	console.log(repo);
-// });

@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export default class FetchApiServices {
 
 	// url = 'https://api.github.com/users/ar-iv/repos';
@@ -5,7 +7,16 @@ export default class FetchApiServices {
 	_apiBase = 'https://api.github.com';
 
 
+	getResposByUserName = async (url) => {
+		// return axios.get(`https://api.github.com/users/ar-iv/repos`)
 
+		try {
+			const { data } = await axios.get(`${this._apiBase}/users/ar-iv/repos`)
+			return data
+		} catch (e) {
+			throw new Error(e)
+		}
+	};
 
 	getResource = async (url) => {
 		const res = await fetch(`${this._apiBase}${url}`);
@@ -14,7 +25,6 @@ export default class FetchApiServices {
 			throw new Error(`Could not fetch ${url}` +
 				`, received ${res.status}`);
 		}
-
 		return await res.json();
 	};
 
@@ -49,19 +59,15 @@ export default class FetchApiServices {
 	};
 
 	getTmp = async () => {
-		fetch('https://jsonplaceholder.typicode.com/todos/1')
-		  .then(response => response.json())
-		  .then(json => console.log(json));
-
-// let url = 'https://api.github.com/repos/javascript-tutorial/en.javascript.info/commits';
-// let url = 'https://api.github.com/users/ar-iv/repos';
-// let response = await fetch(url);
-
-// let commits = await response.json(); // читаем ответ в формате JSON
-
-
-// return commits.json();
-
+		// fetch('https://jsonplaceholder.typicode.com/todos/1')
+		//   .then(response => response.json())
+		//   .then(json => {
+		//   	console.log(json);
+		//   });
+	   fetch('https://jsonplaceholder.typicode.com/todos/1')
+	     .then(function(response) {
+	        console.log (response.json())
+	   })
 	};
 
 
