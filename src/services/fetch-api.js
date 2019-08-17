@@ -1,22 +1,33 @@
-import axios from "axios";
-
 export default class FetchApiServices {
 
-	// url = 'https://api.github.com/users/ar-iv/repos';
+	getTest = async () => {
+		return [
+		    {
+		      id: 1,
+		      name: 'Bilbo Baggins [TEST DATA]',
+		      gender: 'male',
+		      birthYear: 'long ago',
+		      eyeColor: [
+		      	{
+		      		tmp: 'tewrerfwef'
+		      	}
+		      ]
+		    },
+		    {
+		      id: 2,
+		      name: 'Bilbo Baggins [TEST DATA]',
+		      gender: 'male',
+		      birthYear: 'long ago',
+		      eyeColor: [
+		      	{
+		      		tmp: 'tewrerfwef'
+		      	}
+		      ]
+		    }
+		];
+	};
 
 	_apiBase = 'https://api.github.com';
-
-
-	getResposByUserName = async (url) => {
-		// return axios.get(`https://api.github.com/users/ar-iv/repos`)
-
-		try {
-			const { data } = await axios.get(`${this._apiBase}/users/ar-iv/repos`)
-			return data
-		} catch (e) {
-			throw new Error(e)
-		}
-	};
 
 	getResource = async (url) => {
 		const res = await fetch(`${this._apiBase}${url}`);
@@ -45,70 +56,51 @@ export default class FetchApiServices {
 		return this.getResource(`/repos/ar-iv/${repo}`);
 	};
 
-	getTest = async (repo) => {
-		return [
-			{
-				id: 1,
-				title: 'Production-Ready Microservices',
-				author: 'Susan J. Fowler' },
-			{
-				id: 2,
-				title: 'Release It!',
-				author: 'Michael T. Nygard'}
-		];
+	//
+
+	_testUrl = 'http://api.openweathermap.org/data/2.5/weather';
+	_testOptions = {
+		method: 'GET',
+		headers: {
+			'x-rapidapi-host': 'community-open-weather-map.p.rapidapi.com',
+			'x-rapidapi-key': 'cb0e36c8d0msh6acee94fe2297a3p1f16ffjsn2476f4200fc4',
+		}
 	};
 
-	getTmp = async () => {
-		// fetch('https://jsonplaceholder.typicode.com/todos/1')
-		//   .then(response => response.json())
-		//   .then(json => {
-		//   	console.log(json);
-		//   });
-	   fetch('https://jsonplaceholder.typicode.com/todos/1')
-	     .then(function(response) {
-	        console.log (response.json())
-	   })
+	_geoUrl = 'http://api.openweathermap.org/data/2.5/';
+	_Api_Key = '8d2de98e089f1c28e1a22fc19a24ef04';
+
+	getGeoResource = async (get) => {
+
+		const res = await fetch(`${this._geoUrl}${get}&appid=${this._Api_Key}`);
+
+
+		if (!res.ok) {
+			throw new Error(`Could not fetch` +
+				`, received ${res.status}`);
+		}
+		return res.json();
 	};
 
+	getGeoCityName = async (city, country) => {
+		return this.getGeoResource(`weather?q=${city},${country}`);
+	};
 
+	getGeoCityId = async (id) => {
+		return this.getGeoResource(`weather?id=${id}`);
+	};
 
+	getGeoCityCoordinates = async (lat, lon) => {
+		return this.getGeoResource(`weather?lat=${lat}&lon=${lon}`);
+	};
 
-  _apiBaseTmp = 'https://swapi.co/api';
+	getGeoGroup = async () => {
+		return this.getGeoResource(`group?id=524901,498817,501175&units=metric`);
+	};
 
-  getResourceTmp = async (url) => {
-    const res = await fetch(`${this._apiBaseTmp}${url}`);
+	getGeoCitie = async () => {
+		return this.getGeoResource(`data/2.5/find?lat=55.5&lon=37.5&cnt=10`);
+	};
 
-    if (!res.ok) {
-      throw new Error(`Could not fetch ${url}` +
-        `, received ${res.status}`)
-    }
-    return await res.json();
-  };
-
-  getAllPeople = async () => {
-    const res = await this.getResourceTmp(`/people/`);
-    return res.results
-      .map(this._transformPerson)
-      .slice(0, 5);
-  };
-
-  _transformPerson = (person) => {
-    return {
-      id: this._extractId(person),
-      name: person.name,
-      gender: person.gender,
-      birthYear: person.birth_year,
-      eyeColor: person.eye_color
-    }
-  }
-
-
-  _extractId = (item) => {
-    const idRegExp = /\/([0-9]*)\/$/;
-    return item.url.match(idRegExp)[1];
-  };
 
 }
-
-
-// https://api.github.com/users/ar-iv/repos

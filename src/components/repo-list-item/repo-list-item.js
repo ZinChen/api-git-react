@@ -6,8 +6,10 @@ const RepoListItem = ({ repo }) => {
 	const { id, name } = repo;
 	return (
 		<Fragment>
-			<span>{ id } - </span>
-			<span>{ name }</span>
+            <div className="col-sm">
+				<span>{ id } - </span>
+				<span>{ name }</span>
+            </div>
 		</Fragment>
 	);
 };
