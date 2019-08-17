@@ -70,7 +70,6 @@ export default class FetchApiServices {
 	_geoUrl = 'http://api.openweathermap.org/data/2.5/';
 	_Api_Key = '8d2de98e089f1c28e1a22fc19a24ef04';
 
-
 	getGeoResource = async (get) => {
 
 		const res = await fetch(`${this._geoUrl}${get}&appid=${this._Api_Key}`);
