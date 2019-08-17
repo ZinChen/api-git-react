@@ -25,7 +25,7 @@ export default class FetchApiServices {
 			throw new Error(`Could not fetch ${url}` +
 				`, received ${res.status}`);
 		}
-		return await res.json();
+		return res.json();
 	};
 
 	getAllUsers = async () => {
