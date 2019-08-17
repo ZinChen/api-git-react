@@ -11,18 +11,17 @@ class RepoList extends Component {
 
 	componentDidMount () {
 	    const { fetchApiService } = this.props;
-	    const data = fetchApiService.getAllRepos();
-	    // const data = fetchApiService.getTest();
-	    // const data = fetchApiService.getTmp();
-	    // const data = fetchApiService.getResposByUserName();
-	    this.props.reposLoaded(data);
-	    console.log(data);
+	    const data = fetchApiService
+	    	.getAllRepos()
+	    	.then(data => {
+				this.props.reposLoaded(data)
+			});
+	    console.log('data', data);
 	};
 
 	render() {
 		const { repos } = this.props;
-		// console.log(this.props);
-		// console.log(this.props.repos);
+		console.log('props', this.props);
 		return (
 		    <ul className="repo-list">
 				{
