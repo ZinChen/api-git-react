@@ -1,28 +1,30 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import './app.css';
 
 import { HomePage, RepoPage } from '../pages';
+import Nav from '../nav';
+import Header from '../header';
+import Footer from '../footer';
 
 const App = () => {
 	
 	return (
-		<div className="row">
-			<div className="container">
-				<div className="col-12">
-					<Switch>
-						<Route 
-							path="/"
-							component={HomePage}
-							exact />
-						<Route 
-							path="/repo"
-							component={RepoPage} />
-					</Switch>
-				</div>
-			</div>
-		</div>
+		<Fragment>
+			<Nav/>
+			<Header/>
+				<Switch>
+					<Route 
+						path="/"
+						component={HomePage}
+						exact />
+					<Route 
+						path="/repo"
+						component={RepoPage} />
+				</Switch>
+			<Footer/>
+		</Fragment>
 	);
 };
 
