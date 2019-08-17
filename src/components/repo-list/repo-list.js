@@ -21,14 +21,14 @@ class RepoList extends Component {
 	    	// .getAllRepos()
 	    	// .getTest()
 	    	.then((data) => {
-	    		// console.log('geo tmp', data);
+	    		console.log('geo tmp', data);
 	    		this.props.reposLoaded(data)
 	    	});
 
 	};
 
 	render() {
-		const { repos } = this.props;
+		const { repos = {} } = this.props;
 		console.log('geo group', repos.list);
 
 		return (
@@ -36,7 +36,7 @@ class RepoList extends Component {
 				<div className="container">
 					<div className="row">
 						{
-							repos.list.map((repo) => {
+							(repos.list || []).map((repo) => {
 								return (
 									<div className="col-sm" key={repo.id}>
 										{repo.id}
@@ -54,6 +54,7 @@ class RepoList extends Component {
 // <RepoListItem repo={repos} />
 
 const mapStateToProps = ({ repos }) => {
+	console.log('repos', repos)
 	return { repos };
 };
 
